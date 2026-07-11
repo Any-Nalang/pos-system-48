@@ -20,6 +20,10 @@ import {
 	defaultPosFormValues,
 	usePosStore,
 } from "@/features/staff/pos/stores/usePosStore";
+import {
+	emptyCashCountValues,
+	useXReadingStore,
+} from "@/features/staff/xreading/stores/useXReadingStore";
 
 const navLinks = [
 	{ label: "Dashboard", path: "/admin", icon: SquaresFourIcon },
@@ -45,6 +49,8 @@ function AdminHeader() {
 			lastOrder: null,
 			search: "",
 		});
+		useXReadingStore.persist.clearStorage();
+		useXReadingStore.setState({ cashCount: emptyCashCountValues });
 		await authClient.signOut();
 		navigate({ to: "/" });
 	};

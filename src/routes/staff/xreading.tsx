@@ -12,7 +12,7 @@ import { z } from "zod";
 
 const searchSchema = z.object({
 	date: z.enum(["today", "yesterday"]).optional().default("today"),
-	mode: z.enum(["me", "all"]).optional().default("all"),
+	mode: z.enum(["me", "all"]).optional().default("me"),
 });
 
 export const Route = createFileRoute("/staff/xreading")({
