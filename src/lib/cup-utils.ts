@@ -19,15 +19,13 @@ export function parseCupInfoKey(name: string): string {
   return `${cup_size} ${cup_type}`;
 }
 
-const CUP_SORT_PRIORITY: Record<string, number> = {
-  "16OZ ICED": 0,
-  "12OZ ICED": 1,
-  "12OZ HOT": 2,
-};
-
 export function getCupSortPriority(name: string): number {
-  const key = parseCupInfoKey(name);
-  return CUP_SORT_PRIORITY[key] ?? 100;
+  const { cup_type, cup_size } = parseCupInfo(name);
+  const oz = parseInt(cup_size, 10);
+
+  if (cup_type === "ICED" && !isNaN(oz)) return -oz;
+  if (cup_type === "HOT" && !isNaN(oz)) return 100 - oz;
+  return 200;
 }
 
 export function sortCupInventoryItems<
