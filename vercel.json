@@ -3,6 +3,10 @@
     {
       "path": "/api/cron/update-yesterday-stock",
       "schedule": "0 16 * * *"
+    },
+    {
+      "path": "/api/cron/purge-old-data",
+      "schedule": "0 17 1 * *"
     }
   ]
 }
