@@ -194,7 +194,7 @@ export function AdminDashboardScreen() {
               Choose the month for the summary receipt.
             </DialogDescription>
           </DialogHeader>
-          <div className="space-y-2">
+          <div className="space-y-2 max-h-[60vh] overflow-y-auto pr-1">
             {availableMonths.map((m) => (
               <Button
                 key={`${m.year}-${m.month}`}
