@@ -25,6 +25,7 @@ import { Route as AdminInventoryRouteImport } from './routes/admin/inventory'
 import { Route as AdminCashLogsRouteImport } from './routes/admin/cash-logs'
 import { Route as AdminAccountsRouteImport } from './routes/admin/accounts'
 import { Route as ApiCronUpdateYesterdayStockRouteImport } from './routes/api/cron/update-yesterday-stock'
+import { Route as ApiCronPurgeOldDataRouteImport } from './routes/api/cron/purge-old-data'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const StaffRouteRoute = StaffRouteRouteImport.update({
@@ -108,6 +109,11 @@ const ApiCronUpdateYesterdayStockRoute =
     path: '/api/cron/update-yesterday-stock',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiCronPurgeOldDataRoute = ApiCronPurgeOldDataRouteImport.update({
+  id: '/api/cron/purge-old-data',
+  path: '/api/cron/purge-old-data',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -131,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AdminIndexRoute
   '/staff/': typeof StaffIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/cron/purge-old-data': typeof ApiCronPurgeOldDataRoute
   '/api/cron/update-yesterday-stock': typeof ApiCronUpdateYesterdayStockRoute
 }
 export interface FileRoutesByTo {
@@ -148,6 +155,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
   '/staff': typeof StaffIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/cron/purge-old-data': typeof ApiCronPurgeOldDataRoute
   '/api/cron/update-yesterday-stock': typeof ApiCronUpdateYesterdayStockRoute
 }
 export interface FileRoutesById {
@@ -168,6 +176,7 @@ export interface FileRoutesById {
   '/admin/': typeof AdminIndexRoute
   '/staff/': typeof StaffIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/cron/purge-old-data': typeof ApiCronPurgeOldDataRoute
   '/api/cron/update-yesterday-stock': typeof ApiCronUpdateYesterdayStockRoute
 }
 export interface FileRouteTypes {
@@ -189,6 +198,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/staff/'
     | '/api/auth/$'
+    | '/api/cron/purge-old-data'
     | '/api/cron/update-yesterday-stock'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -206,6 +216,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/staff'
     | '/api/auth/$'
+    | '/api/cron/purge-old-data'
     | '/api/cron/update-yesterday-stock'
   id:
     | '__root__'
@@ -225,6 +236,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/staff/'
     | '/api/auth/$'
+    | '/api/cron/purge-old-data'
     | '/api/cron/update-yesterday-stock'
   fileRoutesById: FileRoutesById
 }
@@ -233,6 +245,7 @@ export interface RootRouteChildren {
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
   StaffRouteRoute: typeof StaffRouteRouteWithChildren
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiCronPurgeOldDataRoute: typeof ApiCronPurgeOldDataRoute
   ApiCronUpdateYesterdayStockRoute: typeof ApiCronUpdateYesterdayStockRoute
 }
 
@@ -350,6 +363,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiCronUpdateYesterdayStockRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/cron/purge-old-data': {
+      id: '/api/cron/purge-old-data'
+      path: '/api/cron/purge-old-data'
+      fullPath: '/api/cron/purge-old-data'
+      preLoaderRoute: typeof ApiCronPurgeOldDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -409,6 +429,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRouteRoute: AdminRouteRouteWithChildren,
   StaffRouteRoute: StaffRouteRouteWithChildren,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiCronPurgeOldDataRoute: ApiCronPurgeOldDataRoute,
   ApiCronUpdateYesterdayStockRoute: ApiCronUpdateYesterdayStockRoute,
 }
 export const routeTree = rootRouteImport
